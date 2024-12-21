@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embeds Creator - Code Projects</title>
+    <link rel="icon" type="image/x-icon" href="src/img/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-image: url('src/img/background.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        #embedModal {
+            backdrop-filter: blur(5px);
+        }
+        #emojiPicker {
+            z-index: 1000;
+            width: max-content;
+        }
+        .emoji {
+            font-size: 1.5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen text-white">
+    <!-- Navbar -->
+    <header class="bg-gray-900/80 py-4 shadow-md">
+        <div class="container mx-auto text-center">
+            <h1 class="text-2xl font-bold">Embeds Creator - Code Projects</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex flex-col items-center justify-center flex-grow">
+        <section class="bg-gray-900/80 p-6 rounded-lg shadow-lg text-center max-w-lg w-full">
+            <h2 class="text-2xl font-semibold">Crie mensagens incríveis para o Discord</h2>
+            <p class="mt-4 text-gray-300">
+                Crie e envie mensagens personalizadas utilizando Webhooks no Discord. Personalize a aparência da sua embed com cores, imagens e muito mais!
+            </p>
+            <button id="openModalBtn" class="mt-6 px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-md text-white font-semibold">
+                Criar mensagem embed
+            </button>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div id="embedModal" class="fixed inset-0 bg-black bg-opacity-60 hidden flex items-center justify-center">
+        <div class="bg-gray-900 p-6 rounded-lg max-w-md w-full">
+            <h2 class="text-xl font-bold text-center mb-4">Criar Embed</h2>
+            <form id="embedForm" class="space-y-4">
+                <div>
+                    <label for="webhookUrl" class="block text-sm font-medium">Webhook URL:</label>
+                    <input type="url" id="webhookUrl" required class="w-full px-3 py-2 bg-gray-800 rounded-lg focus:outline-none focus:ring focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="embedTitle" class="block text-sm font-medium">Título:</label>
+                    <div class="flex items-center">
+                        <input type="text" id="embedTitle" class="flex-grow px-3 py-2 bg-gray-800 rounded-lg focus:outline-none focus:ring focus:ring-blue-500">
+                        <button type="button" id="emojiBtn" class="ml-3 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md text-white">
+                            Emoji
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <label for="thumbnailUrl" class="block text-sm font-medium">Thumbnail URL (opcional):</label>
+                    <input type="url" id="thumbnailUrl" class="w-full px-3 py-2 bg-gray-800 rounded-lg focus:outline-none focus:ring focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="imageUrl" class="block text-sm font-medium">Imagem de Fundo (opcional):</label>
+                    <input type="url" id="imageUrl" class="w-full px-3 py-2 bg-gray-800 rounded-lg focus:outline-none focus:ring focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="embedColor" class="block text-sm font-medium">Cor da Embed:</label>
+                    <input type="color" id="embedColor" class="w-full h-10 bg-gray-800 rounded-lg focus:outline-none focus:ring focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="embedDescription" class="block text-sm font-medium">Descrição:</label>
+                    <textarea id="embedDescription" rows="4" required class="w-full px-3 py-2 bg-gray-800 rounded-lg focus:outline-none focus:ring focus:ring-blue-500"></textarea>
+                </div>
+                <div>
+                    <label for="embedFooter" class="block text-sm font-medium">Footer (opcional):</label>
+                    <input type="text" id="embedFooter" class="w-full px-3 py-2 bg-gray-800 rounded-lg focus:outline-none focus:ring focus:ring-blue-500">
+                </div>
+                <button type="submit" class="w-full px-4 py-3 bg-green-600 hover:bg-green-700 rounded-lg text-white font-semibold">
+                    Enviar Mensagem
+                </button>
+            </form>
+            <button id="closeModalBtn" class="mt-4 w-full px-4 py-3 bg-red-600 hover:bg-red-700 rounded-lg text-white font-semibold">
+                Fechar
+            </button>
+        </div>
+    </div>
+
+    <!-- Emoji Picker -->
+    <div id="emojiPicker" class="absolute bg-gray-800 rounded-lg p-3 shadow-lg hidden">
+        <div class="grid grid-cols-6 gap-2">
+            <!-- Emojis de Rosto -->
+            <div class="col-span-6">
+                <h3 class="text-sm font-bold mb-2">Rosto</h3>
+                <span class="emoji cursor-pointer">😀</span>
+                <span class="emoji cursor-pointer">😃</span>
+                <span class="emoji cursor-pointer">😄</span>
+                <span class="emoji cursor-pointer">😁</span>
+                <span class="emoji cursor-pointer">😆</span>
+                <span class="emoji cursor-pointer">😅</span>
+            </div>
+            <!-- Emojis de Animais -->
+            <div class="col-span-6">
+                <h3 class="text-sm font-bold mb-2">Animais</h3>
+                <span class="emoji cursor-pointer">🐶</span>
+                <span class="emoji cursor-pointer">🐱</span>
+                <span class="emoji cursor-pointer">🐭</span>
+                <span class="emoji cursor-pointer">🐹</span>
+                <span class="emoji cursor-pointer">🐰</span>
+                <span class="emoji cursor-pointer">🦊</span>
+            </div>
+            <!-- Emojis de Comida -->
+            <div class="col-span-6">
+                <h3 class="text-sm font-bold mb-2">Comida</h3>
+                <span class="emoji cursor-pointer">🍎</span>
+                <span class="emoji cursor-pointer">🍌</span>
+                <span class="emoji cursor-pointer">🍕</span>
+                <span class="emoji cursor-pointer">🍔</span>
+                <span class="emoji cursor-pointer">🍟</span>
+                <span class="emoji cursor-pointer">🍩</span>
+            </div>
+            <!-- Emojis de Atividades -->
+            <div class="col-span-6">
+                <h3 class="text-sm font-bold mb-2">Atividades</h3>
+                <span class="emoji cursor-pointer">⚽</span>
+                <span class="emoji cursor-pointer">🏀</span>
+                <span class="emoji cursor-pointer">🏈</span>
+                <span class="emoji cursor-pointer">🎾</span>
+                <span class="emoji cursor-pointer">🏓</span>
+                <span class="emoji cursor-pointer">🎮</span>
+            </div>
+            <!-- Emojis de Tecnologia e Avisos -->
+            <div class="col-span-6">
+                <h3 class="text-sm font-bold mb-2">Tecnologia e Avisos</h3>
+                <span class="emoji cursor-pointer">🤖</span>
+                <span class="emoji cursor-pointer">🛠️</span>
+                <span class="emoji cursor-pointer">💻</span>
+                <span class="emoji cursor-pointer">🖥️</span>
+                <span class="emoji cursor-pointer">📱</span>
+                <span class="emoji cursor-pointer">📡</span>
+            </div>
+            <div class="col-span-6">
+                <span class="emoji cursor-pointer">🔧</span>
+                <span class="emoji cursor-pointer">🔨</span>
+                <span class="emoji cursor-pointer">📢</span>
+                <span class="emoji cursor-pointer">🚨</span>
+                <span class="emoji cursor-pointer">💡</span>
+                <span class="emoji cursor-pointer">📦</span>
+            </div>
+            <div class="col-span-6">
+                <span class="emoji cursor-pointer">💰</span>
+                <span class="emoji cursor-pointer">🛒</span>
+                <span class="emoji cursor-pointer">📊</span>
+                <span class="emoji cursor-pointer">📈</span>
+                <span class="emoji cursor-pointer">📉</span>
+                <span class="emoji cursor-pointer">📝</span>
+            </div>
+            <div class="col-span-6">
+                <span class="emoji cursor-pointer">📅</span>
+                <span class="emoji cursor-pointer">📌</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900/80 py-4 shadow-md text-center text-sm">
+        2019-2024 Rede Gamer - Code Projects by Code Connect - Todos os Direitos Reservados.
+    </footer>
+
+    <script src="src/js/app.js"></script>
+</body>
+</html>
