@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
 
         const data = {
-            username: "Embed Creator",
+            username: "Embed Creator", // Nome que será usado para o webhook
             embeds: [
                 {
                     title: embedTitleInput.value,
